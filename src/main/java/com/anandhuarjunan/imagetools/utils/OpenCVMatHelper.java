@@ -15,11 +15,11 @@ import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
 import java.nio.ByteBuffer;
 
-public class OpenCVMat {
+public class OpenCVMatHelper {
     private Mat originalImage, effect;
 
     // Constructor
-    public OpenCVMat() {
+    public OpenCVMatHelper() {
     }
 
     public void setEffect(Mat effect) {
@@ -28,6 +28,10 @@ public class OpenCVMat {
 
     public void setOriginalImage(Mat originalImage) {
         this.originalImage = originalImage;
+    }
+    
+    public void setOriginalJavaFxImage(Image originalImage) {
+        this.originalImage = imageToMatrix(originalImage);
     }
 
     //Return the original Matrix of the Image

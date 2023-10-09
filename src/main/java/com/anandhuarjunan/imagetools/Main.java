@@ -1,7 +1,6 @@
 package com.anandhuarjunan.imagetools;
 
 
-import org.opencv.core.Core;
 
 import com.anandhuarjunan.imagetools.controller.MainController;
 

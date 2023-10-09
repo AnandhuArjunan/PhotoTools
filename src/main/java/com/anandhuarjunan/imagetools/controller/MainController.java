@@ -9,7 +9,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
 import com.anandhuarjunan.imagetools.utils.BasicEffects;
+import com.anandhuarjunan.imagetools.utils.OpenCVMatHelper;
+import com.anandhuarjunan.imagetools.utils.OpenCvAlgorithms;
 import com.anandhuarjunan.imagetools.utils.RuntimeUtil;
 
 import javafx.application.Platform;
@@ -23,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 public class MainController implements Initializable {
@@ -52,11 +61,17 @@ public class MainController implements Initializable {
     @FXML
     private Button fontBrowse;
 
-    @FXML
-    private StackPane imageStackPane;
+   // @FXML
+  //  private StackPane imageStackPane;
     
     @FXML
     private ImageView imageView;
+    
+    //@FXML
+    //private StackPane imageStackPane1;
+    
+    @FXML
+    private ImageView imageView1;
     
     @FXML
     private Slider brightnessSld;
@@ -69,6 +84,12 @@ public class MainController implements Initializable {
 
     @FXML
     private Slider hueSld;
+    
+    @FXML
+    private HBox hbImage;
+    
+    @FXML
+    private HBox showPreviewBtn;
 
     private Timer ramTimer = new Timer();
     
@@ -89,9 +110,22 @@ public class MainController implements Initializable {
 		saturationSld.setUserData(3);
 		chooseFileDirectoryAction();
 		loadRAMStatus();
-		imageView.fitWidthProperty().bind(imageStackPane.widthProperty()); 
-		imageView.fitHeightProperty().bind(imageStackPane.heightProperty()); 
-		sliderAction(contrastSld,hueSld,brightnessSld,saturationSld);
+		imageView.fitWidthProperty().bind(hbImage.widthProperty().divide(2)); 
+		imageView.fitHeightProperty().bind(hbImage.heightProperty()); 
+		imageView1.fitWidthProperty().bind(hbImage.widthProperty().divide(2)); 
+		imageView1.fitHeightProperty().bind(hbImage.heightProperty()); 
+		
+		//sliderAction(contrastSld,hueSld,brightnessSld,saturationSld);
+		
+		showPreviewBtn.setOnMouseClicked(e->{
+			
+			OpenCVMatHelper cvMat = new OpenCVMatHelper();
+			cvMat.setOriginalJavaFxImage(imageView.getImage());
+			
+			
+			cvMat.setEffect(OpenCvAlgorithms.convertNegativeToPositiveOrViceVersa(cvMat.getOriginalImage()));
+			imageView1.setImage(cvMat.getImagePost());
+		});
 	}
 		
 
@@ -109,7 +143,7 @@ public class MainController implements Initializable {
 	        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
 	            basicEffectDoubles[(Integer)slider.getUserData()] = newValue.doubleValue();
 	            BasicEffects basicEffects = new BasicEffects(basicEffectDoubles[0], basicEffectDoubles[1], basicEffectDoubles[2], basicEffectDoubles[3]);
-	            basicEffects.changeEffect(imageView);
+	            basicEffects.changeEffect(imageView1);
 	            System.out.println("h");
 	        });
 		}
@@ -154,6 +188,8 @@ private void chooseFileDirectoryAction() {
 	            fontLoc.setText(inputfile.getName());
 	            Image image = new Image(inputfile.toURI().toString());
 	            imageView.setImage(image);
+	            imageView1.setImage(image);
+	            
          }
     });
 

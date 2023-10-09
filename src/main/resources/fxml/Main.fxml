@@ -11,7 +11,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
@@ -85,7 +84,7 @@
                   </HBox>
                   <HBox id="showPreviewPane" fx:id="showPreviewBtn" alignment="CENTER" prefHeight="100.0" prefWidth="125.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="96.0" prefWidth="101.0" text="SHOW PREVIEW" textAlignment="CENTER" wrapText="true" />
+                        <Label alignment="CENTER" prefHeight="96.0" prefWidth="101.0" text="PROCESS" textAlignment="CENTER" wrapText="true" />
                      </children>
                   </HBox>
                </children>
@@ -105,20 +104,25 @@
       </HBox>
    </bottom>
    <center>
-      <StackPane fx:id="imageStackPane" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-               <StackPane.margin>
-                  <Insets />
-               </StackPane.margin>
-            </ImageView>
-         </children>
+      <HBox fx:id="hbImage" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>
-      </StackPane>
+         <children>
+            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <ImageView fx:id="imageView1" pickOnBounds="true" preserveRatio="true">
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
    </center>
 </BorderPane>

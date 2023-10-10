@@ -13,6 +13,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.nio.ByteBuffer;
 
 public class OpenCVMatHelper {
@@ -30,9 +31,15 @@ public class OpenCVMatHelper {
         this.originalImage = originalImage;
     }
     
-    public void setOriginalJavaFxImage(Image originalImage) {
+    public void setOriginalImageFromFxImage(Image originalImage) {
         this.originalImage = imageToMatrix(originalImage);
     }
+    
+    public void setOriginalImageByPath(File originalImagePath) {
+        this.originalImage = Imgcodecs.imread(originalImagePath.getPath(), Imgcodecs.CV_LOAD_IMAGE_COLOR);
+    }
+    
+    
 
     //Return the original Matrix of the Image
     public Mat getOriginalImage() {

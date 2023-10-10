@@ -1,12 +1,19 @@
 package com.anandhuarjunan.imagetools.utils;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 
 public class JFXUtil {
 	public static String toHexString(Color color) {
@@ -26,24 +33,25 @@ public class JFXUtil {
 		a.show();
 	}
 	
+	 public static void downloadImageWithLocationChooser(ImageView imageView) throws IOException {
+	        FileChooser fileChooser = new FileChooser();
+	        fileChooser.setTitle("Select a location to save the image");
+	        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+	        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
 
-
-	public static BufferedImage toBufferedImage(Image img)
-	{
-	    if (img instanceof BufferedImage)
-	    {
-	        return (BufferedImage) img;
+	        File file = fileChooser.showSaveDialog(null);
+	        if (file != null) {
+	            downloadImage(imageView, file);
+	        }
 	    }
+	 
+	 public static void downloadImage(ImageView imageView, File file) throws IOException {
+	        Image image = imageView.getImage();
+	        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+	        ImageIO.write(bufferedImage, "png", file);
+	    }
+	
 
-	    // Create a buffered image with transparency
-	    BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
-	    // Draw the image on to the buffered image
-	    Graphics2D bGr = bimage.createGraphics();
-	    bGr.drawImage(img, 0, 0, null);
-	    bGr.dispose();
 
-	    // Return the buffered image
-	    return bimage;
-	}
 }

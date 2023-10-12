@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -37,7 +38,7 @@
                            <font>
                               <Font size="26.0" />
                            </font></Label>
-                        <Label text="Apply different algorithms on images" VBox.vgrow="ALWAYS" />
+                        <Label text="Apply image processing algorithms !" VBox.vgrow="ALWAYS" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
@@ -61,22 +62,6 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-               <children>
-                  <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
-                     <children>
-                        <Button fx:id="processImage" mnemonicParsing="false" text="PROCESS">
-                           <padding>
-                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </HBox>
          </children>
       </VBox>
    </top>
@@ -96,31 +81,45 @@
       </VBox>
    </bottom>
    <center>
-      <HBox fx:id="hbImage" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="imageContainer" spacing="20.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
-            <ImageView fx:id="imageView1" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
+            <ToolBar fx:id="toolBar" />
+            <HBox fx:id="hbImage" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="10.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <ImageView fx:id="imageView1" pickOnBounds="true" preserveRatio="true">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </HBox>
+      </VBox>
    </center>
    <left>
-      <TreeView fx:id="opTreeView" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+      <VBox spacing="10.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets left="20.0" />
-         </BorderPane.margin></TreeView>
+            <Insets left="20.0" top="10.0" />
+         </BorderPane.margin>
+         <children>
+            <TreeView fx:id="opTreeView" minHeight="0.0" minWidth="0.0" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+            <Button fx:id="processImage" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefWidth="249.0" text="PROCESS" VBox.vgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </Button>
+         </children>
+      </VBox>
    </left>
 </BorderPane>

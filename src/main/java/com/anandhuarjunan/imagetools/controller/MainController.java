@@ -2,6 +2,7 @@ package com.anandhuarjunan.imagetools.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,10 +10,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
+import org.opencv.imgproc.Imgproc;
 
+import com.anandhuarjunan.imagetools.algorithms.ComplexMatConvertor;
 import com.anandhuarjunan.imagetools.algorithms.SimpleMatConvertor;
 import com.anandhuarjunan.imagetools.helper.AlgorithmsMetadataHelper;
 import com.anandhuarjunan.imagetools.model.AlgorithmTreeDataModel;
@@ -21,20 +25,32 @@ import com.anandhuarjunan.imagetools.utils.JFXUtil;
 import com.anandhuarjunan.imagetools.utils.OpenCVMatHelper;
 import com.anandhuarjunan.imagetools.utils.RuntimeUtil;
 
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 public class MainController implements Initializable {
 
@@ -78,6 +94,12 @@ public class MainController implements Initializable {
 
 	@FXML
 	private TreeView<AlgorithmTreeDataModel> opTreeView;
+	
+	@FXML
+	private VBox imageContainer;
+	
+    @FXML
+    private ToolBar toolBar;
 
 	private Timer ramTimer = new Timer();
 
@@ -92,10 +114,13 @@ public class MainController implements Initializable {
 	public MainController() {
 		basicEffectDoubles = new double[4];
 	}
+	ComplexMatConvertor complexMatConvertor = null;
+	
+ 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
+		try {			
 			processImage.setDisable(true);
 			chooseFileDirectoryAction();
 			loadRAMStatus();
@@ -104,9 +129,29 @@ public class MainController implements Initializable {
 			imageView1.fitWidthProperty().bind(hbImage.widthProperty().divide(2));
 			imageView1.fitHeightProperty().bind(hbImage.heightProperty());
 			algorithmsMetadata.initializeOperationsView(opTreeView);
+			removeToolBar();
+
+	        // Make the toolbar autoscrollable
+	        toolBar.prefWidthProperty().bind(imageContainer.widthProperty());
+	        toolBar.maxWidthProperty().bind(imageContainer.widthProperty());
 
 			opTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				algorithmTreeDataModel = newValue.getValue();
+				if("COMPLEX".equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())) {
+					try {
+						addToolBar();
+						Class<?> class1 = Class.forName(algorithmTreeDataModel.getAlgorithmCodePath());
+						Constructor<?> constructor = class1.getConstructor(ToolBar.class);
+						complexMatConvertor = (ComplexMatConvertor)constructor.newInstance(toolBar);	
+						complexMatConvertor.init();
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					
+				}else{
+					removeToolBar();
+				}
+				
 				processImageButtonActions();
 			});
 
@@ -133,15 +178,24 @@ public class MainController implements Initializable {
 					cvMat.setOriginalImageByPath(inputfile);
 
 						try {
-							SimpleMatConvertor convertor = (SimpleMatConvertor) Class.forName(algorithmTreeDataModel.getAlgorithmCodePath()).newInstance();
-							cvMat.setEffect(convertor.convert(cvMat.getOriginalImage()));
-							imageView1.setImage(cvMat.getImagePost());
+							if("COMPLEX".equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())) {
+								cvMat.setEffect(complexMatConvertor.convert(cvMat.getOriginalImage()));
+								imageView1.setImage(cvMat.getImagePost());
+							}else if("SIMPLE".equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())){
 
+								SimpleMatConvertor convertor = (SimpleMatConvertor) Class.forName(algorithmTreeDataModel.getAlgorithmCodePath()).newInstance();
+								cvMat.setEffect(convertor.convert(cvMat.getOriginalImage()));
+								imageView1.setImage(cvMat.getImagePost());
+							}else {
+								processImage.setDisable(true);
+							}
+							
+							
 						} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
 							e1.printStackTrace();
 						}
 
-				
+						
 
 				});
 
@@ -218,4 +272,20 @@ public class MainController implements Initializable {
 		});
 
 	}
+	
+	void addToolBar() {
+		if(!imageContainer.getChildren().contains(toolBar)) {
+		
+			imageContainer.getChildren().add(0, toolBar);
+			 
+		}
+		
+	}
+	void removeToolBar() {
+		toolBar.getItems().clear();
+	
+		imageContainer.getChildren().remove(toolBar);
+	      
+	}
+	
 }

@@ -25,6 +25,7 @@ import com.anandhuarjunan.imagetools.utils.JFXUtil;
 import com.anandhuarjunan.imagetools.utils.OpenCVMatHelper;
 import com.anandhuarjunan.imagetools.utils.RuntimeUtil;
 
+import animatefx.animation.*;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -100,6 +101,9 @@ public class MainController implements Initializable {
 	
     @FXML
     private ToolBar toolBar;
+    
+    @FXML
+    private VBox sourceImageCont;
 
 	private Timer ramTimer = new Timer();
 
@@ -155,7 +159,6 @@ public class MainController implements Initializable {
 				processImageButtonActions();
 			});
 
-			URL is = MainController.class.getResource("/icons/loading.gif");
 
 			download.setOnAction(e -> {
 				try {
@@ -166,20 +169,17 @@ public class MainController implements Initializable {
 			});
 
 			processImage.setOnMouseClicked(e -> {
-
 				executorService.execute(() -> {
-					try {
-						imageView1.setImage(new Image(is.toURI().toString()));
-					} catch (URISyntaxException e1) {
-						e1.printStackTrace();
-					}
+		
+					
+					
 					OpenCVMatHelper cvMat = new OpenCVMatHelper();
 
 					cvMat.setOriginalImageByPath(inputfile);
 
 						try {
 							if("COMPLEX".equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())) {
-								cvMat.setEffect(complexMatConvertor.convert(cvMat.getOriginalImage()));
+								cvMat.setEffect(complexMatConvertor.validateAndConvert(cvMat.getOriginalImage()));
 								imageView1.setImage(cvMat.getImagePost());
 							}else if("SIMPLE".equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())){
 
@@ -275,17 +275,17 @@ public class MainController implements Initializable {
 	
 	void addToolBar() {
 		if(!imageContainer.getChildren().contains(toolBar)) {
-		
 			imageContainer.getChildren().add(0, toolBar);
-			 
+			new FadeIn(imageContainer).play();
+
 		}
-		
 	}
 	void removeToolBar() {
-		toolBar.getItems().clear();
-	
-		imageContainer.getChildren().remove(toolBar);
-	      
+		if(imageContainer.getChildren().contains(toolBar)) {
+			toolBar.getItems().clear();
+			new FadeIn(imageContainer).play();
+			imageContainer.getChildren().remove(toolBar);
+		}  
 	}
 	
 }

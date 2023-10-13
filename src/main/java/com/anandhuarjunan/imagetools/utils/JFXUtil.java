@@ -7,9 +7,13 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -26,11 +30,14 @@ public class JFXUtil {
 	
 	
 	public static void showInfoAlert(String title , String content) {
-		Alert a = new Alert(AlertType.NONE);
-		a.setTitle(title);
-		a.setContentText(content);
-		a.setAlertType(AlertType.INFORMATION);
-		a.show();
+		Platform.runLater(()->{
+			Alert a = new Alert(AlertType.NONE);
+			a.setTitle(title);
+			a.setContentText(content);
+			a.setAlertType(AlertType.INFORMATION);
+			a.show();
+		});
+		
 	}
 	
 	 public static void downloadImageWithLocationChooser(ImageView imageView) throws IOException {
@@ -49,7 +56,12 @@ public class JFXUtil {
 	        Image image = imageView.getImage();
 	        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
 	        ImageIO.write(bufferedImage, "png", file);
-	    }
+	 }
+	 
+	 public static File chooseFileDirectoryAction(Button eventNode) {
+			FileChooser fileChooser = new FileChooser();
+			return fileChooser.showOpenDialog(eventNode.getScene().getWindow());
+		}
 	
 
 

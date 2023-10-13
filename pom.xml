@@ -27,6 +27,7 @@
 			<artifactId>opencv</artifactId>
 			<version>3.4.2-0</version>
 		</dependency>
+		
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
 		<dependency>
@@ -41,6 +42,15 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.13.0</version>
 		</dependency>
+	<!-- https://mvnrepository.com/artifact/io.github.typhon0/AnimateFX -->
+<dependency>
+    <groupId>io.github.typhon0</groupId>
+    <artifactId>AnimateFX</artifactId>
+    <version>1.2.0</version>
+</dependency>
+	
+
+
 
 
 		<dependency>

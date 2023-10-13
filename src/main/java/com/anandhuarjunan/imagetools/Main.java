@@ -27,6 +27,7 @@ public void start(Stage stage) throws Exception {
 	stage.initStyle(StageStyle.DECORATED);
 	stage.getIcons().add(new Image(Main.class.getResourceAsStream("/icons/icon.png")));
 	stage.setTitle("PhotoTools");
+	scene.getStylesheets().add(getClass().getResource("/theme/app.css").toString());
 	stage.setOnHidden(e->{
 		controller.shutdown();
 		Platform.exit();

@@ -29,7 +29,6 @@ public class ColorConversions extends ComplexMatConvertor{
 	    choiceBox.setValue("Grayscale");
 	    addDiffColorSpaces("Grayscale", Imgproc.COLOR_BGR2GRAY);
 	    addDiffColorSpaces("HSL", Imgproc.COLOR_RGB2HSV);
-	    
 	}
 	
 

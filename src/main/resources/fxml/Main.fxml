@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
@@ -62,16 +63,20 @@
                   </VBox>
                </children>
             </HBox>
+            <Separator prefWidth="200.0" />
          </children>
       </VBox>
    </top>
    <bottom>
       <VBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="download" mnemonicParsing="false" text="Download" />
-            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" style="-fx-background-color: -color-accent-9;">
+            <Button fx:id="download" mnemonicParsing="false" prefWidth="249.0" text="DOWNLOAD">
+               <VBox.margin>
+                  <Insets bottom="10.0" right="10.0" />
+               </VBox.margin></Button>
+            <HBox alignment="CENTER_RIGHT" prefHeight="30.0" style="-fx-background-color: -fx-accent-base;">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\@ Copyright 2023 - Anandhu Arjunan" />
+                  <Text fill="#b5a0a0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -fx-bg-light;" text="Developed By Anandhu Arjunan" />
                </children>
                <padding>
                   <Insets right="30.0" />
@@ -113,6 +118,7 @@
             <Insets left="20.0" top="10.0" />
          </BorderPane.margin>
          <children>
+            <Label style="-fx-font-size: 20; -fx-text-fill: -fx-accent-base;" text="Operations" />
             <TreeView fx:id="opTreeView" minHeight="0.0" minWidth="0.0" prefHeight="200.0" VBox.vgrow="ALWAYS" />
             <Button fx:id="processImage" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefWidth="249.0" text="PROCESS" VBox.vgrow="ALWAYS">
                <padding>

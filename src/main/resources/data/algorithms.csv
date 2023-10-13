@@ -5,3 +5,4 @@ ALGO_ID,ALGO_NAME,ALGO_GROUP_ID,ALGO_GROUP_NAME,ALGO_CODE_PATH,ALGO_CODE_COMPLEX
 4,Single Image Haze Removal Using Dark Channel Prior,2,Image Enhancements,com.anandhuarjunan.imagetools.algorithms.darkchanneldehazing.DarkChannelPriorDehazing,SIMPLE
 6,Color Maps,1,Image Enhancements,com.anandhuarjunan.imagetools.algorithms.colourconversion.ColorConversions,COMPLEX
 6,Color Spaces,1,Image Enhancements,com.anandhuarjunan.imagetools.algorithms.colourconversion.ColorSpaces,COMPLEX
+6,Copy Color From a Photo,1,Image Enhancements,com.anandhuarjunan.imagetools.algorithms.CopyColorFromPhoto,COMPLEX

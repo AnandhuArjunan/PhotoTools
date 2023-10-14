@@ -18,8 +18,8 @@ import com.anandhuarjunan.imagetools.algorithms.utils.Filters;
 
 public class DarkChannelPriorDehazing implements SimpleMatConvertor{
 	double minAtmosLight = 240.0;
-	private static final double krnlRatio = 0.01; // set kernel ratio
-	public static final double eps = 0.000001;
+	private static final double KRNLRATIO = 0.01; // set kernel ratio
+	public static final double EPS = 0.000001;
 	@Override
 	public Mat convert(Mat image) {
 		image.convertTo(image, CvType.CV_32F);
@@ -40,7 +40,7 @@ public class DarkChannelPriorDehazing implements SimpleMatConvertor{
 			}
 		}
 		// minimum filter
-		int krnlSz = Double.valueOf(Math.max(Math.max(rows * krnlRatio, cols * krnlRatio), 3.0)).intValue();
+		int krnlSz = Double.valueOf(Math.max(Math.max(rows * KRNLRATIO, cols * KRNLRATIO), 3.0)).intValue();
 		Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(krnlSz, krnlSz), new Point(-1, -1));
 		Imgproc.erode(dc, dc, kernel);
 		// get coarse transmission map
@@ -54,7 +54,7 @@ public class DarkChannelPriorDehazing implements SimpleMatConvertor{
 		Core.divide(gray, new Scalar(255.0), gray);
 		// refine transmission map
 		int r = krnlSz * 4;
-		t = Filters.GuidedImageFilter(gray, t, r, eps);
+		t = Filters.GuidedImageFilter(gray, t, r, EPS);
 		// get minimum atmospheric light
 		minAtmosLight = Math.min(minAtmosLight, Core.minMaxLoc(dc).maxVal);
 		// dehaze each color channel

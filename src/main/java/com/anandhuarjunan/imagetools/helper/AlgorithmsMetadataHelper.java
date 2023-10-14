@@ -41,6 +41,7 @@ public class AlgorithmsMetadataHelper {
 		    	algorithmTreeDataModel.setAlgorithmName(algoGroupName);
 		    	algorithmTreeDataModel.setAlgorithmGroupId(algoGroupId);
 		    	newItem.setValue(algorithmTreeDataModel);
+		    	newItem.setExpanded(true);
 		    	rootItem.getChildren().add(newItem);
 		    }
 		    		    
@@ -54,6 +55,7 @@ public class AlgorithmsMetadataHelper {
 		   
 		}
 		treeView.setRoot(rootItem);
+		
 		treeView.setShowRoot(false);
 		
 	}

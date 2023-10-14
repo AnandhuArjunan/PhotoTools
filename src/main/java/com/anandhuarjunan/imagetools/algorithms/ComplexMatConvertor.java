@@ -21,7 +21,7 @@ public abstract class ComplexMatConvertor {
 	}
 	
 	protected abstract void loadUI(ToolBar box);
-	protected abstract Mat convert(Mat input);
+	public abstract Mat convert(Mat input);
 	
 	public Mat validateAndConvert(Mat input) {
 		if(this instanceof ComplxMatArgumentsValidator) {

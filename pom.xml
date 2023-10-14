@@ -7,7 +7,7 @@
 	<groupId>com.anandhuarjunan</groupId>
 	<artifactId>PhotoTools</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<description>Apply LUT to your image</description>
+	<description>Simple tool for image processing</description>
 	<url>https://github.com/AnandhuArjunan/FontTools</url>
 
 	<properties>
@@ -35,6 +35,13 @@
 			<artifactId>commons-csv</artifactId>
 			<version>1.10.0</version>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/de.jensd/fontawesomefx -->
+<dependency>
+    <groupId>de.jensd</groupId>
+    <artifactId>fontawesomefx</artifactId>
+    <version>8.2</version>
+</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 		<dependency>

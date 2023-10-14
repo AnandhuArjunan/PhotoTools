@@ -20,7 +20,7 @@ public class ColorSpaces extends ComplexMatConvertor{
 	}
 	@Override
 	protected void loadUI(ToolBar box) {
-		box.getItems().add(new Label("Colour Spaces : "));
+		box.getItems().add(new Label("Colour Map : "));
 	    box.getItems().add(choiceBox);
 	    choiceBox.setValue("HOT");
 

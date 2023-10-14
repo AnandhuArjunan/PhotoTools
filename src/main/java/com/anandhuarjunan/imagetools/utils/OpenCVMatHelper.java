@@ -3,6 +3,7 @@
 package com.anandhuarjunan.imagetools.utils;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelFormat;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritablePixelFormat;
 import org.opencv.core.CvType;
@@ -17,11 +18,9 @@ import java.io.File;
 import java.nio.ByteBuffer;
 
 public class OpenCVMatHelper {
-    private Mat originalImage, effect;
+    private Mat originalImage;
+    private Mat effect;
 
-    // Constructor
-    public OpenCVMatHelper() {
-    }
 
     public void setEffect(Mat effect) {
         this.effect = effect;
@@ -77,7 +76,7 @@ public class OpenCVMatHelper {
         byte[] buffer = new byte[width * height * 4];
         //Reads every pixel from image and converts to matrix
         PixelReader reader = image.getPixelReader();
-        WritablePixelFormat<ByteBuffer> format = WritablePixelFormat.getByteBgraInstance();
+        WritablePixelFormat<ByteBuffer> format = PixelFormat.getByteBgraInstance();
         reader.getPixels(0, 0, width, height, format, buffer, 0, width * 4);
         //CV 4 channel
         Mat mat = new Mat(height, width, CvType.CV_8UC4);
@@ -102,7 +101,7 @@ public class OpenCVMatHelper {
 
         //Reads every pixel from image and converts to matrix
         PixelReader reader = image.getPixelReader();
-        WritablePixelFormat<ByteBuffer> format = WritablePixelFormat.getByteBgraInstance();
+        WritablePixelFormat<ByteBuffer> format = PixelFormat.getByteBgraInstance();
         reader.getPixels(0, 0, width, height, format, buffer, 0, width * 4);
 
         //CV 4 channel

@@ -11,3 +11,6 @@
 .button{
 	-fx-text-fill: -fx-accent-base;
 }
+.glyph-icon {
+    -fx-fill: -fx-accent-base;
+}

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -39,23 +41,27 @@
                            <font>
                               <Font size="26.0" />
                            </font></Label>
-                        <Label text="Apply image processing algorithms !" VBox.vgrow="ALWAYS" />
+                        <Label text="A simple tool for image proceesing !" VBox.vgrow="ALWAYS" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
                      </padding>
                   </VBox>
-                  <HBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                      <children>
+                        <FontAwesomeIcon glyphName="IMAGE" size="1.5em" />
                         <TextField fx:id="fontLoc" alignment="TOP_LEFT" prefHeight="36.0" prefWidth="171.0" />
-                        <Button fx:id="fontBrowse" mnemonicParsing="false" text="Import Image" />
+                        <Button fx:id="fontBrowse" contentDisplay="RIGHT" mnemonicParsing="false" text="Import Image">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="ARROW_CIRCLE_DOWN" size="1.2em" />
+                           </graphic></Button>
                      </children>
                   </HBox>
-                  <VBox alignment="CENTER_LEFT" spacing="5.0">
+                  <VBox alignment="CENTER_LEFT" prefWidth="350.0" spacing="5.0">
                      <children>
                         <Label text="Available Memory %" />
                         <Label fx:id="memAvlStatus" text="Label" />
-                        <ProgressBar fx:id="ramProgressBar" prefWidth="200.0" progress="0.0" />
+                        <ProgressBar fx:id="ramProgressBar" prefWidth="200.0" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -70,10 +76,20 @@
    <bottom>
       <VBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="download" mnemonicParsing="false" prefWidth="249.0" text="DOWNLOAD">
+            <HBox alignment="CENTER_RIGHT" spacing="15.0" VBox.vgrow="ALWAYS">
                <VBox.margin>
-                  <Insets bottom="10.0" right="10.0" />
-               </VBox.margin></Button>
+                  <Insets bottom="8.0" right="10.0" />
+               </VBox.margin>
+               <children>
+                  <Label fx:id="prcImageInfo" text="Processing Image" visible="false" />
+                  <ProgressBar fx:id="progressbarIndicator" prefWidth="200.0" visible="false" />
+                  <Button fx:id="download" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" prefWidth="200.0" text="DOWNLOAD">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="DOWNLOAD" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="30.0" style="-fx-background-color: -fx-accent-base;">
                <children>
                   <Text fill="#b5a0a0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: -fx-bg-light;" text="Developed By Anandhu Arjunan" />
@@ -86,31 +102,43 @@
       </VBox>
    </bottom>
    <center>
-      <VBox fx:id="imageContainer" spacing="20.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="imageStatckView" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" left="40.0" right="40.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <ToolBar fx:id="toolBar" />
-            <HBox fx:id="hbImage" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <VBox fx:id="imageContainer" alignment="CENTER" spacing="20.0">
                <children>
-                  <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
-                  <ImageView fx:id="imageView1" pickOnBounds="true" preserveRatio="true">
-                     <viewport>
-                        <Rectangle2D />
-                     </viewport>
-                  </ImageView>
+                  <ToolBar fx:id="toolBar" />
+                  <HBox fx:id="hbImage" alignment="CENTER" minHeight="0.0" minWidth="0.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="imageView" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                        <ImageView fx:id="imageView1" pickOnBounds="true" preserveRatio="true">
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </HBox>
+            </VBox>
+            <ImageView fx:id="impImageView" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Untitled-1.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
          </children>
-      </VBox>
+      </StackPane>
    </center>
    <left>
       <VBox spacing="10.0" BorderPane.alignment="CENTER">
@@ -120,10 +148,13 @@
          <children>
             <Label style="-fx-font-size: 20; -fx-text-fill: -fx-accent-base;" text="Operations" />
             <TreeView fx:id="opTreeView" minHeight="0.0" minWidth="0.0" prefHeight="200.0" VBox.vgrow="ALWAYS" />
-            <Button fx:id="processImage" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefWidth="249.0" text="PROCESS" VBox.vgrow="ALWAYS">
+            <Button fx:id="processImage" contentDisplay="RIGHT" graphicTextGap="10.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" prefWidth="249.0" text="PROCESS" VBox.vgrow="ALWAYS">
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
+               <graphic>
+                  <FontAwesomeIcon glyphName="LEGAL" size="1.2em" />
+               </graphic>
             </Button>
          </children>
       </VBox>

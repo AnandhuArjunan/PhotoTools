@@ -25,7 +25,7 @@ It consists of different operations to apply effects , enhance images , change c
 
 ## Requirements
 
-- Java 8 [Oracle JDK or any OpenJDK with OpenJFX]
+- Java 8
 - Maven
   
 ## Dependencies 

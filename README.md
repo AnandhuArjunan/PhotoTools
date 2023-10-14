@@ -1,5 +1,5 @@
 
-# PhotoTools - *A simple tool for image processing that uses opencv.*
+# PhotoTools - *A simple tool for image processing that uses javafx and opencv.*
 It consists of different operations to apply effects , enhance images , change colour tone .etc.
  
 

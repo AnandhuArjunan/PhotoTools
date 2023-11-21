@@ -87,7 +87,7 @@ public class MainController implements Initializable {
 	private Button download;
 
 	@FXML
-	private TreeView<AlgorithmTreeDataModel> opTreeView;
+	private TreeView<Object> opTreeView;
 	
 	@FXML
 	private VBox imageContainer;
@@ -156,24 +156,26 @@ public class MainController implements Initializable {
 
 
 	
-	private ChangeListener<? super TreeItem<AlgorithmTreeDataModel>> initToolBarGui() {
+	private ChangeListener<? super TreeItem<Object>> initToolBarGui() {
 		return (observable, oldValue, newValue) -> {
-			algorithmTreeDataModel = newValue.getValue();
-			if(Constants.COMPLEX_MAT.equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())) {
-				try {
-					addToolBar();
-					Class<?> class1 = Class.forName(algorithmTreeDataModel.getAlgorithmCodePath());
-					Constructor<?> constructor = class1.getConstructor(ToolBar.class);
-					complexMatConvertor = (ComplexMatConvertor)constructor.newInstance(toolBar);	
-					complexMatConvertor.init();
-				}catch(Exception e) {
-					JFXUtil.showInfoAlert("Could not initialize Operations UI !", e.getMessage());
-				}
-				
-			}else{
-				removeToolBar();
+			if(newValue.isLeaf() && newValue.getValue() instanceof AlgorithmTreeDataModel) {
+				algorithmTreeDataModel = (AlgorithmTreeDataModel)newValue.getValue();
+				if(Constants.COMPLEX_MAT.equalsIgnoreCase(algorithmTreeDataModel.getAlgorithmCodeComplex())) {
+					try {
+						addToolBar();
+						Class<?> class1 = Class.forName(algorithmTreeDataModel.getAlgorithmCodePath());
+						Constructor<?> constructor = class1.getConstructor(ToolBar.class);
+						complexMatConvertor = (ComplexMatConvertor)constructor.newInstance(toolBar);	
+						complexMatConvertor.init();
+					}catch(Exception e) {
+						JFXUtil.showInfoAlert("Could not initialize Operations UI !", e.getMessage());
+					}
+					
+				}else{
+					removeToolBar();
+				}	
 			}
-			
+
 		};
 	}
 

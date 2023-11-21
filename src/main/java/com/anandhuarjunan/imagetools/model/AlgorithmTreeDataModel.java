@@ -7,6 +7,18 @@ public class AlgorithmTreeDataModel {
 	private String algorithmGroupId;
 	private String algorithmCodePath;
 	private String algorithmCodeComplex;
+	
+	
+	
+	public AlgorithmTreeDataModel(String algorithmName, String algorithmId, String algorithmGroupId,
+			String algorithmCodePath, String algorithmCodeComplex) {
+		super();
+		this.algorithmName = algorithmName;
+		this.algorithmId = algorithmId;
+		this.algorithmGroupId = algorithmGroupId;
+		this.algorithmCodePath = algorithmCodePath;
+		this.algorithmCodeComplex = algorithmCodeComplex;
+	}
 	public String getAlgorithmName() {
 		return algorithmName;
 	}

@@ -22,6 +22,10 @@ public class Utils {
 		return readCsv("/data/algorithms.csv");
 	}
 	
+	public static Iterable<CSVRecord> readAlgorithmsGroupDataCsv() throws IOException {
+		return readCsv("/data/groups.csv");
+	}
+	
 	
 
 }

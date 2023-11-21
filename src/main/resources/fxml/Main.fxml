@@ -41,7 +41,7 @@
                            <font>
                               <Font size="26.0" />
                            </font></Label>
-                        <Label text="A simple tool for image proceesing !" VBox.vgrow="ALWAYS" />
+                        <Label text="A simple tool for image processing !" VBox.vgrow="ALWAYS" />
                      </children>
                      <padding>
                         <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />

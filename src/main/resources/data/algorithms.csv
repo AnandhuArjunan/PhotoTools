@@ -1,9 +1,10 @@
 ALGO_ID,ALGO_NAME,ALGO_GROUP_ID,ALGO_CODE_PATH,ALGO_CODE_COMPLEX
-1,Negative to Positive Image Converter,1,com.anandhuarjunan.imagetools.algorithms.NegativeToPostive,SIMPLE
-2,Under Water Image Enhancement,2,com.anandhuarjunan.imagetools.algorithms.underwaterimageenhance.UnderWaterImageEnhanceByFusion,SIMPLE
-3,Optimized Contrast Enhancement,2,com.anandhuarjunan.imagetools.algorithms.optimizedcontastenhancement.OptimizedContrastEnhance,SIMPLE
-4,Single Image Haze Removal Using Dark Channel Prior,2,com.anandhuarjunan.imagetools.algorithms.darkchanneldehazing.DarkChannelPriorDehazing,SIMPLE
-6,Color Spaces,1,com.anandhuarjunan.imagetools.algorithms.colourconversion.ColorConversions,COMPLEX
-7,Color Map,1,com.anandhuarjunan.imagetools.algorithms.colourconversion.ColorSpaces,COMPLEX
-8,Copy Color From a Photo,1,com.anandhuarjunan.imagetools.algorithms.CopyColorFromPhoto,COMPLEX
-9,Cartoonize 1,3,com.anandhuarjunan.imagetools.algorithms.cartoonize.Cartoonize,SIMPLE
+1,Negative to Positive Image Converter,1,com.anandhuarjunan.imagetools.opencv.algorithms.NegativeToPostive,SIMPLE
+2,Under Water Image Enhancement,2,com.anandhuarjunan.imagetools.opencv.algorithms.underwaterimageenhance.UnderWaterImageEnhanceByFusion,SIMPLE
+3,Optimized Contrast Enhancement,2,com.anandhuarjunan.imagetools.opencv.algorithms.optimizedcontastenhancement.OptimizedContrastEnhance,SIMPLE
+4,Single Image Haze Removal Using Dark Channel Prior,2,com.anandhuarjunan.imagetools.opencv.algorithms.darkchanneldehazing.DarkChannelPriorDehazing,SIMPLE
+6,Color Spaces,1,com.anandhuarjunan.imagetools.opencv.algorithms.colourconversion.ColorConversions,COMPLEX
+7,Color Map,1,com.anandhuarjunan.imagetools.opencv.algorithms.colourconversion.ColorSpaces,COMPLEX
+8,Copy Color From a Photo,1,com.anandhuarjunan.imagetools.opencv.algorithms.CopyColorFromPhoto,COMPLEX
+9,Cartoonize 1,3,com.anandhuarjunan.imagetools.opencv.algorithms.cartoonize.Cartoonize,SIMPLE
+10,Color Changer,1,com.anandhuarjunan.imagetools.opencv.algorithms.ColorChanger,COMPLEX

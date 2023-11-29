@@ -14,6 +14,10 @@ import com.anandhuarjunan.imagetools.model.AlgorithmTreeDataModel;
 import com.anandhuarjunan.imagetools.model.Groups;
 import com.anandhuarjunan.imagetools.utils.Utils;
 
+import de.jensd.fx.glyphs.GlyphIcon;
+import de.jensd.fx.glyphs.GlyphIcons;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
@@ -44,6 +48,9 @@ public class AlgorithmsMetadataHelper {
 			List<CSVRecord> fleafs = leafs.stream().filter(e->e.get("ALGO_GROUP_ID").equalsIgnoreCase(groups.getGroupId())).collect(Collectors.toList());
 			fleafs.forEach(leaf->{
 				TreeItem<Object> leafItem = new TreeItem<>();
+				FontAwesomeIcon awesomeIcon= new FontAwesomeIcon();
+				awesomeIcon.setGlyphName("INFO");
+				leafItem.setGraphic(awesomeIcon);
 				leafItem.setValue(new AlgorithmTreeDataModel(leaf.get("ALGO_NAME"), leaf.get("ALGO_ID"), leaf.get("ALGO_GROUP_ID"), leaf.get("ALGO_CODE_PATH"), leaf.get("ALGO_CODE_COMPLEX")));
 				treeItem.getChildren().add(leafItem);
 			});

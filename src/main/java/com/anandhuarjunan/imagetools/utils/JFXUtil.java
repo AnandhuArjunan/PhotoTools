@@ -53,8 +53,7 @@ public class JFXUtil {
 	    }
 	 
 	 public static void downloadImage(ImageView imageView, File file) throws IOException {
-	        Image image = imageView.getImage();
-	        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+	        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageView.getImage(), null);
 	        ImageIO.write(bufferedImage, "png", file);
 	 }
 	 

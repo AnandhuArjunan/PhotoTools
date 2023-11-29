@@ -110,7 +110,11 @@
 }
 
 /* ========== Slider ======================== */
-.slider {}
+.slider {
+	
+-fx-pref-width: 300px;
+
+}
 .slider > .track {
 	-fx-background-color: -fx-bg-light;
 	-fx-background-insets: 1;
@@ -390,4 +394,8 @@
 .round > .decrement-arrow-button {
 	/* Bottom button, make the bottom right corner round */
 	-fx-background-radius: 0 0 13px 0;
+}
+
+.tool-bar{
+	-fx-background-color: -fx-bg-dark;
 }
